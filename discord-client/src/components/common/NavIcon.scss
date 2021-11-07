@@ -1,0 +1,8 @@
+.nav-icon {
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    border-radius: 1.5rem;
+  }
+}

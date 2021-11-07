@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  api:
+    container_name: discord-api-server
+    build:
+      context: ./discord-api
+      dockerfile: ../docker/php/Dockerfile
+    image: discord.api/php-fpm
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./discord-api:/var/www/discord-api
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - discord-network
+  
+  webserver:
+    image: nginx:alpine
+    container_name: discord-webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./discord-api:/var/www/discord-api
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - discord-network
+    
+
+  database:
+    image: mysql:latest
+    container_name: discord-database
+    restart: always
+    env_file:
+      - ".env"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - discord-network
+
+networks:
+  discord-network:
+    driver: bridge
