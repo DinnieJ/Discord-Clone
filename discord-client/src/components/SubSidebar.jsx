@@ -4,7 +4,7 @@ import ProfileBlock from "./common/ProfileBlock";
 import FriendList from "./index/FriendList";
 
 const SubSidebar = () => {
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const [innerDOM, setInnerDOM] = useState(null);
 
   useEffect(() => {

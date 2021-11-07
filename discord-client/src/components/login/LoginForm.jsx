@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../common/TextInput";
 import "./LoginForm.scss";
 import { login } from "../../redux/auth";
 import { Redirect } from "react-router";
+import { showSnackbar } from "../../redux/snackbar";
+import { ERROR_SNACKBAR, SUCCESS_SNACKBAR } from "../../constants/snackbar";
+import Loading from "../common/Loading";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +18,11 @@ const LoginForm = () => {
     setLoading(true)
     await dispatch(login({ username, password }))
       .unwrap()
+      .then((res) => {
+        dispatch(showSnackbar({ type: SUCCESS_SNACKBAR, message: res.message }))
+      }).catch(err => {
+        dispatch(showSnackbar({ type: ERROR_SNACKBAR, message: err.message }))
+      })
       .finally(() => {
         setLoading(false)
       })
@@ -24,7 +32,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   if(isLoggedIn) return <Redirect to="/dashboard"/>
-  else return (
+  
+  return (
     <div className="md:rounded-lg p-8  xs:w-full login-form flex flex-col justify-start items-center shadow-xl">
       <div className="flex flex-col items-start justify-start w-full">
         <h1 className="font-bold text-white text-2xl">Welcome back!</h1>
@@ -55,7 +64,7 @@ const LoginForm = () => {
       <div className="w-full">
         <a
           href="/"
-          className="text-blue-500 font-light text-xs hover:underline"
+          className="block text-blue-500 font-light text-xs hover:underline"
         >
           Forgot your password ?
         </a>
@@ -63,7 +72,7 @@ const LoginForm = () => {
           className="w-full text-center rounded-md py-2 my-1.5 text-white bg-indigo-500 hover:bg-indigo-700 transition ease-out duration-150"
           onClick={clickLogin}
         >
-          { loading ? 'Loading' : 'Login' }
+          { loading ? '...' : 'Login' }
         </button>
         <p className="text-gray-300 text-xs font-light">
           Need an account ?{" "}

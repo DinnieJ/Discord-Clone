@@ -1,7 +1,5 @@
 import React from 'react'
-import ProfileBlock from '../components/common/ProfileBlock'
 import Sidebar from '../components/Sidebar'
-import SubSidebar from '../components/SubSidebar'
 
 const DefaultLayout = ({children}) => {
     return (

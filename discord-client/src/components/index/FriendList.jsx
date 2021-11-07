@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import { USER_STATUS } from "../../constants/user";
 import { getFriendsTestData } from "../../utils/testingData";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const FriendList = () => {
   const friends = getFriendsTestData();
@@ -31,7 +31,6 @@ const FriendList = () => {
 };
 
 const FriendListItem = ({ status, name, id }) => {
-    const {url} = useRouteMatch()
   const getStatusDOM = () => {
     switch (status) {
       case USER_STATUS.ONLINE:

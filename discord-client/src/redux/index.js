@@ -1,9 +1,11 @@
-import authReducer from './auth'
+import auth from './auth'
+import snackbar from './snackbar'
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import ThunkMiddleware from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth,
+    snackbar
 })
 
 const store = createStore(rootReducer, applyMiddleware(ThunkMiddleware));

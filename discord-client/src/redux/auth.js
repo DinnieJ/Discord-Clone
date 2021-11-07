@@ -7,9 +7,10 @@ const login = createAsyncThunk(
         let res = null
         await postLogin(payload).then(response => {
             res = response.data
-        }).catch(err => {
-            
-        })
+        }).catch(error => {
+            throw new Error(error.response.data.error_message)
+        }) 
+
         return res
     }
 )
@@ -32,12 +33,11 @@ const authSlice = createSlice({
         .addCase(login.rejected, (state, action) => {
         })
         .addCase(login.fulfilled, (state, action) => {
-            if(action.payload) {
+            if(action.payload.data) {
                 state.user = action.payload.data.user
                 state.token = action.payload.data.token
                 state.isLoggedIn = true
             } 
-            console.log(state.user);
         })
     }
 })

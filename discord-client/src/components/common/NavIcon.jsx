@@ -5,7 +5,7 @@ import "./NavIcon.scss";
 
 const NavIcon = ({ title, to, action }) => {
   let innerDOM = null;
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const [active, setActive] = useState(false);
 
   useEffect(() => {

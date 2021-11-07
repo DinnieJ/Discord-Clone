@@ -19,11 +19,11 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            $this->sendError($validator->errors()->first(), 422);
+            return $this->sendError($validator->errors()->first(), 422);
         }
 
         if(!$token = JWTAuth::attempt($creds) ) {
-            return $this->sendError('Creds not found', 401);
+            return $this->sendError('Wrong username or password', 401);
         } else {
             return $this->sendResponse([
                 'token' => $token,
