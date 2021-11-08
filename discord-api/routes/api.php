@@ -25,9 +25,8 @@ Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/register', [AuthController::class, 'register']);
-        Route::get('/user', function() {
-            return auth()->user();
-        })->middleware(['auth.jwt']);
+        Route::get('/user', [AuthController::class, 'getUser'])->middleware(['auth.jwt']);
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware(['auth.jwt']);
     });
 
 

@@ -20,7 +20,6 @@ export default createSlice({
             state.message = action.payload.message
             state.show = true
             state.type = action.payload.type
-            console.log(action.payload)
         })
         .addCase(hideSnackbar, (state, action) => {
             state.message = ''

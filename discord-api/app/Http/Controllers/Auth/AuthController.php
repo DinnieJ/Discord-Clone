@@ -13,13 +13,15 @@ class AuthController extends Controller
 {
     public function login(Request $request) {
         $creds = $request->only('username', 'password');
+
         $validator = Validator::make($creds, [
             'username' => 'required|min:8',
             'password' => 'required|min:6|string',
         ]);
 
+
         if($validator->fails()) {
-            return $this->sendError($validator->errors()->first(), 422);
+            return $this->sendError($validator->errors()->first(), 411);
         }
 
         if(!$token = JWTAuth::attempt($creds) ) {
@@ -56,6 +58,21 @@ class AuthController extends Controller
                 return $this->sendError($e->getMessage(), 402);
             }
 
+        }
+    }
+
+    public function getUser(Request $request) {
+        return $this->sendResponse([
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function logout(Request $request) {
+        try {
+            JWTAuth::invalidate();
+            return $this->sendResponse((object)[], 'Logout successful');
+        } catch (Exception $e) {
+            return $this->sendError('Failed to logout');
         }
     }
 }

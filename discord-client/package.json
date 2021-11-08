@@ -47,6 +47,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.8",
     "craco": "^0.0.3",
+    "js-cookie": "^3.0.1",
     "node-sass": "^6.0.1",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
