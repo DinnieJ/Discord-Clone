@@ -56,6 +56,10 @@ const authSlice = createSlice({
     },
 
     reducers: {
+        setUserData: (state, action) => {
+            state.user = action.payload.data.data.user
+            state.isLoggedIn = true
+        }
     },
     extraReducers: builder => {
         builder
@@ -72,15 +76,19 @@ const authSlice = createSlice({
             state.isLoggedIn = false
             removeToken()
         }).addCase(fetchUser.fulfilled, (state, action) => {
+            console.log(action.payload)
             if(action.payload?.data) {
                 state.user = action.payload.data.user
                 state.token = getToken()
                 state.isLoggedIn = true
             }
+        }).addCase(fetchUser.rejected, (state, action) => {
+            removeToken()
         })
     }
 })
 
 export { login, logout, fetchUser }
+export const { setUserData } = authSlice.actions
 
 export default authSlice.reducer

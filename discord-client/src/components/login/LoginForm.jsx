@@ -6,7 +6,6 @@ import { login } from "../../redux/auth";
 import { Redirect } from "react-router";
 import { showSnackbar } from "../../redux/snackbar";
 import { ERROR_SNACKBAR, SUCCESS_SNACKBAR } from "../../constants/snackbar";
-import Loading from "../common/Loading";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");

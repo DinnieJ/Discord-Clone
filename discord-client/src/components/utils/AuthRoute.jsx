@@ -4,23 +4,7 @@ import React from "react";
 
 const AuthRoute = ({ children, ...rest }) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        isLoggedIn ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
-  );
+  return <Route {...rest}>{isLoggedIn ? children : <Redirect to="/login" />}</Route>
 };
 
 export default AuthRoute;

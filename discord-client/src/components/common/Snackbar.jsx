@@ -5,6 +5,7 @@ import { hideSnackbar } from "../../redux/snackbar";
 import {
   faCheckCircle,
   faExclamationCircle,
+  faTimes,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -59,7 +60,9 @@ const Snackbar = () => {
         />
         <div>{message}</div>
       </div>
-    <button className="text-white font-bold" onClick={() => dispatch(hideSnackbar())}>X</button>
+    <button className="text-white font-bold" onClick={() => dispatch(hideSnackbar())}>
+      <FontAwesomeIcon icon={faTimes} size="1x" color="#ffffff"/>
+    </button>
     </div>
   );
 };
