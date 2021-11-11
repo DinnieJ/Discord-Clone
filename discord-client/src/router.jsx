@@ -1,31 +1,36 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import IndexPage from './pages';
-import LoginPage from './pages/login'
-import DefaultLayout from './layouts/default';
-import AuthLayout from './layouts/auth';
-import NotFound from './components/common/NotFound';
-import DirectMessagePage from './pages/dm/_id';
-import AuthRoute from './components/utils/AuthRoute';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { createBrowserHistory } from 'history'
+import IndexPage from "./pages";
+import LoginPage from "./pages/login";
+import DefaultLayout from "./layouts/default";
+import AuthLayout from "./layouts/auth";
+import NotFound from "./components/common/NotFound";
+import DirectMessagePage from "./pages/dm/_id";
+import AuthRoute from "./components/utils/AuthRoute";
+
 
 const AppRouter = () => {
+  const history = createBrowserHistory()
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
-        <Route exact path={["/", "/dashboard", "/dashboard/dm/:id"]}>
+        <Route exact path={["/", "/dashboard", "/dashboard/@dm/:id"]}>
           <DefaultLayout>
             <AuthRoute path="/">
               <Redirect to="/dashboard" />
             </AuthRoute>
-            <AuthRoute
-              exact
-              path="/dashboard"
-            >
-              <IndexPage/>
+            <AuthRoute exact path="/dashboard">
+              <IndexPage />
             </AuthRoute>
-            <AuthRoute
-              path="/dashboard/dm/:id"
-            ><DirectMessagePage/></AuthRoute>
+            <AuthRoute exact path="/dashboard/@dm/:id">
+              <DirectMessagePage />
+            </AuthRoute>
           </DefaultLayout>
         </Route>
 

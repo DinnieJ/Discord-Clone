@@ -6,12 +6,14 @@ import { login } from "../../redux/auth";
 import { Redirect } from "react-router";
 import { showSnackbar } from "../../redux/snackbar";
 import { ERROR_SNACKBAR, SUCCESS_SNACKBAR } from "../../constants/snackbar";
+import { SocketContext } from "../../utils/socket";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false)
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  
 
   const clickLogin = async () => {
     setLoading(true)
@@ -30,7 +32,7 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
 
-  if(isLoggedIn) return <Redirect to="/dashboard"/>
+  if(isLoggedIn) return <Redirect to="/dashboard/dm"/>
   
   return (
     <div className="md:rounded-lg p-8  xs:w-full login-form flex flex-col justify-start items-center shadow-xl">

@@ -9,7 +9,7 @@ const SubSidebar = () => {
 
   useEffect(() => {
     
-    if(url.startsWith("/dashboard/dm") || url.startsWith("/dashboard")) {
+    if(url.startsWith("/dashboard")) {
         setInnerDOM(<FriendList/>)
     } else {
         setInnerDOM(<div>Nothing</div>)

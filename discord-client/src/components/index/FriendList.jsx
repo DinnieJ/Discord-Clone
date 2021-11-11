@@ -44,7 +44,7 @@ const FriendListItem = ({ status, name, id }) => {
     }
   };
   return (
-    <NavLink to={`/dashboard/dm/${id}`} activeClassName="bg-gray-600" className="flex justify-start items-center hover:bg-gray-600 p-1 my-1 transition duration-200 ease-in-out">
+    <NavLink to={`/dashboard/@dm/${id}`} activeClassName="bg-gray-600" className="flex justify-start items-center hover:bg-gray-600 p-1 my-1 transition duration-200 ease-in-out">
         <div className="avatar p-1.5 rounded-100 bg-gray-900 relative">
           <FontAwesomeIcon icon={faDiscord} size="1x" color="#ffffff" />
           <div

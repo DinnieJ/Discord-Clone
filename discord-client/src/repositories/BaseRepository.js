@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils/cookies";
+import { store } from '../redux'
 
 const AxiosInstance = axios.create({
     baseURL: 'http://localhost:8080/api/v1'

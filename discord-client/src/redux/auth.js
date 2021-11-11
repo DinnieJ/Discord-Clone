@@ -52,7 +52,7 @@ const authSlice = createSlice({
         user: null,
         config: {},
         token: '',
-        isLoggedIn: false
+        isLoggedIn: true
     },
 
     reducers: {

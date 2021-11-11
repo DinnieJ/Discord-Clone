@@ -17,7 +17,7 @@ function App() {
           <AppRouter />
         </Suspense>
         :
-        <div></div>
+        <div>hello</div>
       }
     </div >
   )

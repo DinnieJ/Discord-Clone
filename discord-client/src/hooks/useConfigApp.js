@@ -20,7 +20,6 @@ export default function useConfigApp() {
                 dispatch(showSnackbar({ type: SUCCESS_SNACKBAR, message: 'Welcome back' }))
               })
               .catch((err) => {
-                console.log(err)
                 dispatch(showSnackbar({ type: ERROR_SNACKBAR, message: err.response?.data.status ?? err.message  }))
                 removeToken()
               })
