@@ -15,7 +15,7 @@ const IndexPage = () => {
       </p>
       <a href='https://github.com/DinnieJ/Discord-Clone' className="hover:underline text-indigo-300" target='_blank' rel="noreferrer"><FontAwesomeIcon icon={faGithub} color='#ffffff' className="mx-2"/>Source code</a>
       <button className="text-white bg-indigo-500 hover:bg-indigo-700 px-3 py-2 my-2 rounded-lg transition-all duration-200 ease-in-out font-bold">
-        Find some friend to talk with
+        Find someone to talk with
       </button>
     </div>
   );

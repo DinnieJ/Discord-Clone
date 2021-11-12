@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Redirect,
@@ -22,7 +22,7 @@ const AppRouter = () => {
       <Switch>
         <Route exact path={["/", "/dashboard", "/dashboard/@dm/:id"]}>
           <DefaultLayout>
-            <AuthRoute path="/">
+            <AuthRoute exact path="/">
               <Redirect to="/dashboard" />
             </AuthRoute>
             <AuthRoute exact path="/dashboard">
