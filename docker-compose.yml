@@ -4,14 +4,28 @@ services:
   api:
     container_name: discord-api-server
     build:
-      context: ./discord-api
-      dockerfile: ../docker/php/Dockerfile
-    image: discord.api/php-fpm
+      context: ./discord-server
+      dockerfile: ../docker/node/Dockerfile
+    image: discord.api/node
     restart: unless-stopped
     tty: true
     volumes:
-      - ./discord-api:/var/www/discord-api
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./discord-server:/var/www/discord-server
+    networks:
+      - discord-network
+    ports:
+      - 3333:3333
+
+  client:
+    container_name: discord-client
+    build:
+      context: ./discord-client
+      dockerfile: ../docker/client/Dockerfile
+    image: discord.api/client
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./discord-client:/var/www/discord-client
     networks:
       - discord-network
   
@@ -46,6 +60,7 @@ services:
       - ./docker/mysql:/var/lib/mysql
     networks:
       - discord-network
+  
 
 networks:
   discord-network:

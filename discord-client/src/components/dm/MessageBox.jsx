@@ -13,9 +13,9 @@ const MessageBox = ({ box }) => {
           {box.username}
         </h1>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-3">
         {box.messages.map((item, i) => (
-          <p key={i} className="text-white pl-12 hover:bg-gray-400 rounded-2xl">
+          <p key={i} className="text-white pl-12 mr-12 hover:bg-gray-400 rounded-2xl">
             {item.content}
           </p>
         ))}

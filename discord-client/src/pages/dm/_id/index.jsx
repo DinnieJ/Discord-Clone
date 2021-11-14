@@ -22,9 +22,10 @@ const DirectMessagePage = () => {
   };
 
   useEffect(() => {
+    fetch('/api').then(res => console.log(res.data))
     const _convertedMessageList = messagesList.reduce((prev, current) => {
       if (
-        prev.length == 0 ||
+        prev.length === 0 ||
         prev[prev.length - 1].username !== current.username
       ) {
         prev.push({ username: current.username, messages: [{ content:current.content, created: current.created }] });

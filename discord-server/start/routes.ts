@@ -20,6 +20,14 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
+Route.get('/v1/test', async () => {
+  return { hello: 'noob2' }
 })
+
+Route.group(() => {
+  Route.group(() => {
+    Route.post('login', 'UsersController.postLogin')
+    Route.post('register', 'UsersController.postRegister')
+    Route.get('user', 'UsersController.fetchUser').middleware(['jwtauth'])
+  }).prefix('auth')
+}).prefix('v1')
