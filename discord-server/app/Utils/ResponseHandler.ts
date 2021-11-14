@@ -1,7 +1,7 @@
 import { ResponseContract } from '@ioc:Adonis/Core/Response';
 export default class ResponseHandler {
     public static sendResponse(response: ResponseContract, data, status = 200) {
-        response.send({
+        response.status(200).send({
             success: true,
             status,
             data,
@@ -11,7 +11,7 @@ export default class ResponseHandler {
     }
 
     public static sendError(response, errorMessage, errCode = "ERR_BAD_REQUEST", status = 400) {
-        response.send({
+        response.status(status).send({
             success: false,
             status,
             data: {},

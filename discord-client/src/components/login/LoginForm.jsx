@@ -20,7 +20,7 @@ const LoginForm = () => {
     await dispatch(login({ username, password }))
       .unwrap()
       .then((res) => {
-        dispatch(showSnackbar({ type: SUCCESS_SNACKBAR, message: res.message }))
+        dispatch(showSnackbar({ type: SUCCESS_SNACKBAR, message: 'Login successful !' }))
       }).catch(err => {
         dispatch(showSnackbar({ type: ERROR_SNACKBAR, message: err.message }))
       })
@@ -32,7 +32,7 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
 
-  if(isLoggedIn) return <Redirect to="/dashboard/dm"/>
+  if(isLoggedIn) return <Redirect to="/dashboard"/>
   
   return (
     <div className="md:rounded-lg p-8  xs:w-full login-form flex flex-col justify-start items-center shadow-xl">

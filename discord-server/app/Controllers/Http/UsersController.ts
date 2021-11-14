@@ -52,7 +52,6 @@ export default class UsersController {
 
   public async fetchUser({request, response}: HttpContextContract) {
     const user = await JWTHandler.authUser(JWTHandler.getHeaderToken(request))
-    
     ResponseHandler.sendResponse(response, { user })
   }
 }

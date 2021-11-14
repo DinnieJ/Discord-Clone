@@ -13,7 +13,7 @@ export default class JWTHandler {
   public static async authUser(token) {
     try {
       const decoded = jwt.verify(token, Env.get('JWT_SECRET') ?? 'secret')
-      const user = User.query().where('id', decoded['id']).select('username', 'name', 'config')
+      const user = User.query().where('id', decoded['id']).select('username', 'name', 'config').first()
       return user
     } catch (e) {
       return null
