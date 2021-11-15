@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import { createBrowserHistory } from 'history'
+import { Router, Switch, Route, Redirect } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import IndexPage from "./pages";
 import LoginPage from "./pages/login";
 import DefaultLayout from "./layouts/default";
@@ -14,9 +9,8 @@ import NotFound from "./components/common/NotFound";
 import DirectMessagePage from "./pages/dm/_id";
 import AuthRoute from "./components/utils/AuthRoute";
 
-
 const AppRouter = () => {
-  const history = createBrowserHistory()
+  const history = createBrowserHistory();
   return (
     <Router history={history}>
       <Switch>

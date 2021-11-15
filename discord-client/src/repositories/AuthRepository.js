@@ -8,6 +8,6 @@ export const postLogout = () => {
     return AxiosInstance.post('auth/logout')
 }
 
-export const fetchUserByToken = () => {
-    return AxiosInstance.get('auth/user')
+export const loginWithToken = (socket) => {
+    return AxiosInstance.post('auth/user')
 }

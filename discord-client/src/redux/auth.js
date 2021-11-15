@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
-import { fetchUserByToken, postLogin, postLogout } from '../repositories/AuthRepository'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { loginWithToken, postLogin, postLogout } from '../repositories/AuthRepository'
 import { getToken, removeToken, setToken } from '../utils/cookies'
 
 const login = createAsyncThunk(
@@ -16,16 +16,20 @@ const login = createAsyncThunk(
     }
 )
 
-const logout = createAction('auth/logout')
+const logout = createAsyncThunk('auth/logout', async() => {
+    await postLogout().catch(error => {
+        throw new Error(error.response?.data.error.error_message ?? error)
+    })
+
+    return true
+})
 
 const fetchUser = createAsyncThunk(
     'auth/user',
     async (payload, thunkAPI) => {
-        console.log('run')
         let res = null
-        await fetchUserByToken().then(response => {
+        await loginWithToken().then(response => {
             res = response.data
-            console.log(res)
         }).catch(error => {
             throw new Error(error.response?.data.error.error_message ?? error)
         })
@@ -58,7 +62,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true
                 setToken(action.payload.data.token)
             } 
-        }).addCase(logout, (state, action) => {
+        }).addCase(logout.fulfilled, (state, action) => {
             state.user = null
             state.token = ''
             state.isLoggedIn = false
@@ -71,6 +75,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true
             }
         }).addCase(fetchUser.rejected, (state, action) => {
+            state.isLoggedIn = false
             removeToken()
         })
     }

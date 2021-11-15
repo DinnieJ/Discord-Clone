@@ -58,6 +58,15 @@ services:
       - ./docker/mysql:/var/lib/mysql
     networks:
       - discord-network
+    
+  redis:
+    image: redis:alpine
+    container_name: discord-redis
+    command: redis-server
+    expose:
+      - 6379
+    networks:
+      - discord-network
   
 
 networks:

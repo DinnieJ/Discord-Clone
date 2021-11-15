@@ -28,6 +28,11 @@ Route.group(() => {
   Route.group(() => {
     Route.post('login', 'UsersController.postLogin')
     Route.post('register', 'UsersController.postRegister')
-    Route.get('user', 'UsersController.fetchUser').middleware(['jwtauth'])
+    Route.post('logout', 'UsersController.postLogout').middleware('jwtauth')
+    Route.post('user', 'UsersController.fetchUser').middleware(['jwtauth'])
   }).prefix('auth')
+
+  Route.group(() => {
+    Route.post('direct/:id', 'DirectMessagesController.postDirectMessage')
+  })
 }).prefix('v1')

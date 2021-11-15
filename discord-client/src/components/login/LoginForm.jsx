@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../common/TextInput";
 import "./LoginForm.scss";
@@ -13,13 +13,15 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false)
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-  
+
+  const socket = useContext(SocketContext)
 
   const clickLogin = async () => {
     setLoading(true)
-    await dispatch(login({ username, password }))
+    await dispatch(login({ username, password, socket: socket.id }))
       .unwrap()
       .then((res) => {
+        socket.emit('user:reset-socket', res.data.user.id)
         dispatch(showSnackbar({ type: SUCCESS_SNACKBAR, message: 'Login successful !' }))
       }).catch(err => {
         dispatch(showSnackbar({ type: ERROR_SNACKBAR, message: err.message }))
