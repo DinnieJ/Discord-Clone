@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import DirectMessageSession from 'App/Models/DirectMessageSession'
+import DirectMessaagesRepository from 'App/Repositories/DirectMessagesRepository'
 import JWTHandler from 'App/Utils/JWTHandler'
 
 export default class DirectMessagesController {
@@ -15,6 +16,10 @@ export default class DirectMessagesController {
     }
 
     public async getDirectMessageData({ request }: HttpContextContract) {
-        
+        const otherId = request.param('id', null)
+        const authUser: any = await JWTHandler.authUser(request)
+        const query = await DirectMessaagesRepository.findDirectMessageSession(authUser?.id, otherId)
+        console.log(query)
+
     }
 }

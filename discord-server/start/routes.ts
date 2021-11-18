@@ -33,6 +33,7 @@ Route.group(() => {
   }).prefix('auth')
 
   Route.group(() => {
-    Route.post('direct/:id', 'DirectMessagesController.postDirectMessage')
-  })
+    Route.get(':id', 'DirectMessagesController.getDirectMessageData')
+    Route.post(':sessionId', 'DirectMessagesController.postMessage')
+  }).prefix('direct')
 }).prefix('v1')
