@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api:
-    container_name: discord-api-server
+    container_name: discord-api
     build:
       context: ./discord-server
       dockerfile: ../docker/node/Dockerfile
@@ -42,8 +42,8 @@ services:
     
 
   database:
-    image: mysql:latest
     container_name: discord-database
+    image: mysql:5.7.36
     restart: always
     env_file:
       - ".env"

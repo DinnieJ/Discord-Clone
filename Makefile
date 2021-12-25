@@ -1,16 +1,25 @@
 build:
+	cp ./discord-server/.env.example ./discord-server/.env
 	docker-compose build
-	docker-compose up -d
-	docker-compose exec api composer install
-	docker-compose exec api composer update
-	docker-compose exec api php artisan key:generate
-	docker-compose exec api composer dump-autoload
-migrate:
-	docker-compose exec api php artisan migrate
+	docker-compose exec api npm install
+	docker-compose exec api generate:key
+	docker-compose exec client npm install
 
-cache:
-	docker-compose exec api php artisan cache:clear
-	docker-compose exec api php artisan config:clear
-	docker-compose exec api php artisan route:clear
-	docker-compose exec api php artisan optimize
-	docker-compose exec api composer dump-autoload
+up:
+	docker-compose up -d
+
+up-log:
+	docker-compose up
+
+status:
+	docker-compose ps
+
+migrate:
+	docker-compose exec api node ace migration:run
+
+bash-server:
+	docker-compose exec api bash
+
+redis:
+	docker-compose exec redis redis-cli
+
